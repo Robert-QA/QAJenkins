@@ -12,12 +12,14 @@ pipeline {
         }
         stage('Build') {
             steps {
+                echo "Building Project"
                 sh 'mvn --version'
                 sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
+                echo "Testing Project"
                 sh 'mvn test'
             }
             post {
