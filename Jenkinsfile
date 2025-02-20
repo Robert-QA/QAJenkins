@@ -1,34 +1,27 @@
 pipeline {
     agent any
-    tools{
-        maven 'Maven' // Ensure Maven is installed on Jenkins
+    tools {
+        maven 'Maven 3.8.4'  // Ensure Maven is installed in Jenkins
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Robert-QA/QAJenkins.git'
+                git 'https://github.com/user/sample-java-project.git'
             }
         }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
-                echo "Building the project..."
             }
         }
         stage('Test') {
             steps {
                 sh 'mvn test'
-                echo "Running tests..."
             }
             post {
                 always {
-                    junit '**/target/surefire-reports.*.xml' // Publish Reports
+                    junit '**/target/surefire-reports/*.xml'  // Publish JUnit reports
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo "Deploying application..."
             }
         }
     }
