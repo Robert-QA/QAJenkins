@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven 3.8.4'  // Ensure Maven is installed in Jenkins
+        maven 'Maven 3.6.3'  // Ensure Maven is installed in Jenkins
     }
     stages {
         stage('Checkout') {
@@ -12,6 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'mvn --version'
                 sh 'mvn clean package'
             }
         }
